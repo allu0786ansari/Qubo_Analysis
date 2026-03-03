@@ -141,18 +141,18 @@ All implementation notebooks and data are located in the `1_Code/` directory, or
 ---
 
 ## References
+1. QDock — [JinyinZha/QDock on GitHub](https://github.com/JinyinZha/QDock/tree/main)
+2. Glover et al. — [A Tutorial on Formulating and Using QUBO Models (arXiv:1811.11538)](https://arxiv.org/abs/1811.11538)
+3. J. Zha et al. — "Encoding Molecular Docking for Quantum Computers," *J. Chem. Theory Comput.*, vol. 19, no. 24, pp. 9018–9024, Dec. 2023. [DOI: 10.1021/acs.jctc.3c00943](https://doi.org/10.1021/acs.jctc.3c00943)
+4. IBM — [CPLEX Optimization Studio Documentation](https://www.ibm.com/docs/en/icos/22.1.2)
+5. SCIP — [SCIP Doxygen Documentation](https://www.scipopt.org/doc/html/)
+6. PySCIPOpt — [PySCIPOpt Documentation](https://pyscipopt.readthedocs.io/en/latest/)
+7. Pyomo — [Pyomo Documentation 6.9.5](https://pyomo.readthedocs.io/en/stable/)
+8. D-Wave — [Ocean SDK Installation](https://docs.dwavequantum.com/en/latest/ocean/install.html)
+9. D-Wave — Problem Formulation Guide, 2022. [www.dwavesys.com](https://www.dwavesys.com)
+10. Hercules — [DKenefake/hercules on GitHub](https://github.com/DKenefake/hercules)
 
-1. MathWorks — [What Is a QUBO Problem?](https://www.mathworks.com/help/matlab/math/what-is-a-qubo.html)
-2. IBM — [CPLEX Optimization Studio Documentation](https://www.ibm.com/docs/en/icos/22.1.2)
-3. SCIP — [SCIP Doxygen Documentation](https://www.scipopt.org/doc/html/)
-4. PySCIPOpt — [PySCIPOpt Documentation](https://pyscipopt.readthedocs.io/en/latest/)
-5. Pyomo — [Pyomo Documentation 6.9.5](https://pyomo.readthedocs.io/en/stable/)
-6. D-Wave — [Ocean SDK Installation](https://docs.dwavequantum.com/en/latest/ocean/install.html)
-7. D-Wave — Problem Formulation Guide, 2022. [www.dwavesys.com](https://www.dwavesys.com)
-8. Hercules — [DKenefake/hercules on GitHub](https://github.com/DKenefake/hercules)
-9. QDock — [JinyinZha/QDock on GitHub](https://github.com/JinyinZha/QDock/tree/main)
-10. Glover et al. — [A Tutorial on Formulating and Using QUBO Models (arXiv:1811.11538)](https://arxiv.org/abs/1811.11538)
-11. J. Zha et al. — "Encoding Molecular Docking for Quantum Computers," *J. Chem. Theory Comput.*, vol. 19, no. 24, pp. 9018–9024, Dec. 2023. [DOI: 10.1021/acs.jctc.3c00943](https://doi.org/10.1021/acs.jctc.3c00943)
+
 
 
 
