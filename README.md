@@ -116,34 +116,31 @@ Tested on matrices of size 4×4, 5×5, and 8×8:
 
 ## Code Structure
 
-All implementation code is located in the `1_code/` directory, organized by solver and problem type:
+All implementation notebooks and data are located in the `1_Code/` directory, organized by solver and problem type:
 
 ```
-1_code/
-│
-├── 1y6r_Qubo/          # QUBO construction for protein structure 1Y6R
-│                         # Includes GPM and FAM encoding pipelines,
-│                         # Q-matrix generation (675 variables), and
-│                         # docking pose reconstruction via Kabsch RMSD alignment
-│
-├── Hercules/           # Heuristic QUBO solving using the Hercules Rust library
-│                         # Branch-and-bound solver runs on benchmark and
-│                         # molecular docking QUBO instances; runtime ~10s
-│
-├── Pyomo/              # Exact QUBO solving via Pyomo with SCIP and CPLEX backends
-│                         # Binary quadratic models, solver configuration,
-│                         # and result extraction / bitstring analysis scripts
-│
-├── Qubolite/           # Brute-force exact solver using QUBOLite (NumPy-based)
-│                         # Used as a ground-truth reference for small/moderate instances
-│                         # Includes energy evaluation and bitstring overlap analysis
-│
-└── Tutorial/           # Step-by-step notebooks and scripts covering:
-                          #   - Basic QUBO formulation and Q-matrix construction
-                          #   - Penalty-based constraint encoding
-                          #   - Ising model equivalence demonstration
-                          #   - Running benchmark instances (Q1–Q4) across all solvers
-                          #   - Structural overlap and Jaccard similarity analysis
+1_Code/                         # All implementation notebooks and data
+├── 1y6r_Qubo/                  # 1Y6R molecular docking QUBO (GPM/FAM encoding)
+│   ├── QUBO_1y6R_Pyomo_SCIP.ipynb
+│   ├── QUBO_1y6R_Pyscipopt-scip.ipynb
+│   └── Qubo_1y6r_Pyomo-CPLIX.ipynb
+├── Hercules/                   # Hercules QUBO solver implementations
+│   ├── Data/
+│   │   ├── QUBO_1y6r_matrix.txt
+│   │   └── QUBO_Matrix_1.txt
+│   ├── Qubo_1y6r_matrix.ipynb
+│   └── Qubo_Matrix_1.ipynb
+├── Pyomo/                      # Pyomo + SCIP/CPLEX implementations
+│   ├── Data/
+│   │   ├── matrix_1.txt
+│   │   └── matrix_2.txt
+│   └── QUBO_Matrix_1.ipynb
+├── Qubolite/                   # Qubolite solver implementations
+│   ├── Data/
+│   │   ├── matrix_1.txt
+│   │   └── matrix_2.txt
+│   └── Qubolite.ipynb
+└── QUBO_Tutorial.ipynb         # Basic QUBO tutorial and examples
 ```
 
 ---
@@ -161,6 +158,7 @@ All implementation code is located in the `1_code/` directory, organized by solv
 9. QDock — [JinyinZha/QDock on GitHub](https://github.com/JinyinZha/QDock/tree/main)
 10. Glover et al. — [A Tutorial on Formulating and Using QUBO Models (arXiv:1811.11538)](https://arxiv.org/abs/1811.11538)
 11. J. Zha et al. — "Encoding Molecular Docking for Quantum Computers," *J. Chem. Theory Comput.*, vol. 19, no. 24, pp. 9018–9024, Dec. 2023. [DOI: 10.1021/acs.jctc.3c00943](https://doi.org/10.1021/acs.jctc.3c00943)
+
 
 
 
