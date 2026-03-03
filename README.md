@@ -98,7 +98,7 @@ Tested on matrices of size 4×4, 5×5, and 8×8:
 | Q1 (4×4) | -11.0 | Unique global optimum |
 | Q2 (5×5) | -5.0  | Degenerate — multiple optima |
 | Q3 (8×8) | -12.0 | Unique global optimum |
-| Q4 (8×8) | -6889.0 | Highly degenerate |
+| Q4 (8×8) | -6889.0 | Highly degenerate- multiple optima |
 
 ### Molecular Docking QUBO (Protein: 1Y6R, FAM/GPM, 675 variables)
 
@@ -161,6 +161,7 @@ All implementation code is located in the `1_code/` directory, organized by solv
 9. QDock — [JinyinZha/QDock on GitHub](https://github.com/JinyinZha/QDock/tree/main)
 10. Glover et al. — [A Tutorial on Formulating and Using QUBO Models (arXiv:1811.11538)](https://arxiv.org/abs/1811.11538)
 11. J. Zha et al. — "Encoding Molecular Docking for Quantum Computers," *J. Chem. Theory Comput.*, vol. 19, no. 24, pp. 9018–9024, Dec. 2023. [DOI: 10.1021/acs.jctc.3c00943](https://doi.org/10.1021/acs.jctc.3c00943)
+
 
 
 
