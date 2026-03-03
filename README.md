@@ -94,7 +94,7 @@ Tested on matrices of size 4×4, 5×5, and 8×8:
 - **Hercules** converged quickly but settled at approximate solutions above the global minimum.
 
 | Matrix | Optimal Value | Notes |
-|--------|--------------|-------------------|-------|
+|--------|--------------|-------|
 | Q1 (4×4) | -11.0 | Unique global optimum |
 | Q2 (5×5) | -5.0  | Degenerate — multiple optima |
 | Q3 (8×8) | -12.0 | Unique global optimum |
