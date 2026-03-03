@@ -39,12 +39,6 @@ where `x` is a binary decision vector and `Q` is a square matrix of constants.
 - **Constraint encoding** — constraints are converted to quadratic penalty terms added to the objective, penalizing infeasible solutions while leaving feasible ones unaffected.
 - **Ising equivalence** — via the substitution xᵢ = (1 + sᵢ)/2 with sᵢ ∈ {−1, +1}, any QUBO maps to an Ising Hamiltonian, enabling execution on quantum annealing hardware.
 
-### Penalty-Based Constraint Handling
-
-For a constraint such as `x₁ + x₂ ≤ 1`, the corresponding quadratic penalty `P·x₁x₂` (with sufficiently large P) is added to the objective. This transforms a constrained problem into a fully unconstrained QUBO model.
-
----
-
 ## Molecular Docking and QUBO Encoding
 
 ### Problem Setup
@@ -167,4 +161,5 @@ All implementation code is located in the `1_code/` directory, organized by solv
 9. QDock — [JinyinZha/QDock on GitHub](https://github.com/JinyinZha/QDock/tree/main)
 10. Glover et al. — [A Tutorial on Formulating and Using QUBO Models (arXiv:1811.11538)](https://arxiv.org/abs/1811.11538)
 11. J. Zha et al. — "Encoding Molecular Docking for Quantum Computers," *J. Chem. Theory Comput.*, vol. 19, no. 24, pp. 9018–9024, Dec. 2023. [DOI: 10.1021/acs.jctc.3c00943](https://doi.org/10.1021/acs.jctc.3c00943)
+
 
