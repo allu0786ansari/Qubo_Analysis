@@ -1,12 +1,4 @@
-# Quantum Molecular Docking Using QUBO
-
-**Implementation of Quantum Molecular Docking Using Quadratic Unconstrained Binary Optimization**
-
-> Internship Report — Allauddin Ansari, BTech 3rd Year  
-> SRM Institute of Science and Technology, Kattankulathur  
-> Period: 12-Dec 2024 to 11-Jan 2025
-
----
+# QUBO Analysis for Molecular Docking
 
 ## Table of Contents
 
@@ -175,3 +167,4 @@ All implementation code is located in the `1_code/` directory, organized by solv
 9. QDock — [JinyinZha/QDock on GitHub](https://github.com/JinyinZha/QDock/tree/main)
 10. Glover et al. — [A Tutorial on Formulating and Using QUBO Models (arXiv:1811.11538)](https://arxiv.org/abs/1811.11538)
 11. J. Zha et al. — "Encoding Molecular Docking for Quantum Computers," *J. Chem. Theory Comput.*, vol. 19, no. 24, pp. 9018–9024, Dec. 2023. [DOI: 10.1021/acs.jctc.3c00943](https://doi.org/10.1021/acs.jctc.3c00943)
+
