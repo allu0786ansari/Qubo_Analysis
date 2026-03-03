@@ -93,12 +93,12 @@ Tested on matrices of size 4×4, 5×5, and 8×8:
 - **Degeneracy confirmed**: Instances Q2 (5×5) and Q4 (8×8) showed **Jaccard Similarity = 0.00** between SCIP and CPLEX bitstrings despite matching objective values, empirically confirming multiple global optima.
 - **Hercules** converged quickly but settled at approximate solutions above the global minimum.
 
-| Matrix | Optimal Value | SCIP–CPLEX Jaccard | Notes |
+| Matrix | Optimal Value | Notes |
 |--------|--------------|-------------------|-------|
-| Q1 (4×4) | -11.0 | 1.00 | Unique global optimum |
-| Q2 (5×5) | -5.0  | 0.00 | Degenerate — multiple optima |
-| Q3 (8×8) | -12.0 | 1.00 | Unique global optimum |
-| Q4 (8×8) | -6889.0 | 0.00 | Highly degenerate |
+| Q1 (4×4) | -11.0 | Unique global optimum |
+| Q2 (5×5) | -5.0  | Degenerate — multiple optima |
+| Q3 (8×8) | -12.0 | Unique global optimum |
+| Q4 (8×8) | -6889.0 | Highly degenerate |
 
 ### Molecular Docking QUBO (Protein: 1Y6R, FAM/GPM, 675 variables)
 
@@ -161,5 +161,6 @@ All implementation code is located in the `1_code/` directory, organized by solv
 9. QDock — [JinyinZha/QDock on GitHub](https://github.com/JinyinZha/QDock/tree/main)
 10. Glover et al. — [A Tutorial on Formulating and Using QUBO Models (arXiv:1811.11538)](https://arxiv.org/abs/1811.11538)
 11. J. Zha et al. — "Encoding Molecular Docking for Quantum Computers," *J. Chem. Theory Comput.*, vol. 19, no. 24, pp. 9018–9024, Dec. 2023. [DOI: 10.1021/acs.jctc.3c00943](https://doi.org/10.1021/acs.jctc.3c00943)
+
 
 
