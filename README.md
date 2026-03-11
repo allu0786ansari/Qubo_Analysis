@@ -118,8 +118,7 @@ Tested on matrices of size 4×4, 5×5, and 8×8:
 ## Environment Setup
 
 Two install paths are available depending on which solvers you need.
-SCIP and CPLEX are **conda-only** packages and cannot be installed via pip — so
-Path A (conda) is required if you intend to use either of those solvers.
+SCIP and CPLEX are **conda-only** and cannot be installed via pip — Path A is required if you need them.
 
 | Path | Solvers available | Requires |
 |------|------------------|----------|
@@ -132,92 +131,61 @@ Path A (conda) is required if you intend to use either of those solvers.
 
 **Prerequisites:** [Anaconda](https://www.anaconda.com/download) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
 
-No cloning required. `environment.yml` pulls the package directly from GitHub.
-
-#### 1. Create the environment
 ```bash
-conda env create -f https://raw.githubusercontent.com/allu0786ansari/Qubo_Analysis/main/environment.yml
-```
-This single command installs Python 3.11, SCIP, CPLEX, all pip dependencies,
-and the `qubo-molecular-docking` package itself — nothing else needed.
-
-#### 2. Activate and register the Jupyter kernel
-```bash
+# 1. Create and activate the environment
+conda create -n qubo-env python=3.11
 conda activate qubo-env
-qubo-setup-kernel
-```
 
-#### 3. Launch Jupyter
-```bash
+# 2. Install conda-only solvers
+conda install -c conda-forge scip
+conda install -c ibmdecisionoptimization cplex
+
+# 3. Install this repo — all remaining dependencies are pulled in automatically
+pip install git+https://github.com/allu0786ansari/Qubo_Analysis.git
+
+# 4. Register the Jupyter kernel
+qubo-setup-kernel
+
+# 5. Launch Jupyter
 jupyter notebook
 ```
-Select **Python (qubo-env)** as the kernel, then open any notebook under `1_Code/`.
 
-> **Using `make`:** If you prefer, clone the repo and run `make install` instead of step 1, then `make kernel` and `make notebook`.
->
-> **Updating later:** `conda env update -f environment.yml --prune` (or `make update`) inside the activated environment.
+Select **Python (qubo-env)** as the kernel, then open any notebook under `1_Code/`.
 
 ---
 
-### Path B — Pip (Qubolite + Pyomo only)
-
-No conda needed. Install directly from GitHub via pip:
+### Path B — Pip only (Qubolite + Pyomo, no SCIP/CPLEX)
 
 ```bash
+# 1. Create and activate a virtual environment
+python -m venv qubo-env
+
+# Windows
+qubo-env\Scripts\activate
+# Mac / Linux
+source qubo-env/bin/activate
+
+# 2. Install this repo — all dependencies are pulled in automatically
 pip install git+https://github.com/allu0786ansari/Qubo_Analysis.git
+
+# 3. Register the Jupyter kernel
 qubo-setup-kernel
+
+# 4. Launch Jupyter
 jupyter notebook
 ```
 
-> ⚠️ **SCIP and CPLEX are not available on this path** — they are conda-only packages. Notebooks that use these solvers will raise an import error. Use Path A if you need them.
+> ⚠️ **SCIP and CPLEX are not available on this path.** Notebooks using those solvers will raise an import error. Use Path A if you need them.
 
 ---
 
 ### Hercules
 
-Hercules requires a Docker container due to its Rust-based backend.
-
-1. **Pull and run the Docker container:**
-   ```bash
-   docker run --platform linux/amd64 -it \
-     -p 8888:8888 \
-     -v /home/allu786ansari/hercules:/workspace \
-     dkenefake/hercules \
-     bash
-   ```
-   > **Note:** Adjust the `-v` volume path to match your local directory.
-
-2. **Verify your workspace and navigate to it:**
-   ```bash
-   ls /workspace
-   cd /workspace
-   ```
-
-3. **Install Jupyter dependencies inside the container:**
-   ```bash
-   pip install notebook ipykernel numpy scipy
-   ```
-
-4. **Launch Jupyter Notebook:**
-   ```bash
-   jupyter notebook --ip=0.0.0.0 --no-browser --allow-root
-   ```
-
-5. **Open in browser** — click the link printed in the terminal, e.g.:
-   ```
-   http://127.0.0.1:8888/tree?token=<your_token>
-   ```
-
----
-
 ## Code Structure
 
 ```
 qubo-molecular-docking/
-├── environment.yml             # Full conda environment (one-command setup)
-├── pyproject.toml              # Package metadata and pip dependencies
-├── requirements.txt            # Pip-only dependencies (no SCIP/CPLEX)
-├── Makefile                    # Convenience commands: install, kernel, notebook
+├── pyproject.toml              # Package metadata and all pip dependencies
 ├── README.md
 ├── qubo_docking/               # Installable Python package
 │   ├── __init__.py
