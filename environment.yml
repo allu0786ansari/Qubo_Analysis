@@ -1,0 +1,13 @@
+name: qubo-env
+channels:
+  - conda-forge
+  - ibmdecisionoptimization
+  - defaults
+
+dependencies:
+  - python=3.11
+  - scip
+  - cplex
+  - pip
+  - pip:
+      - git+https://github.com/allu0786ansari/Qubo_Analysis.git

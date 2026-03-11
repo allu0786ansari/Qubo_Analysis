@@ -1,0 +1,7 @@
+# Core pip-installable dependencies
+# NOTE: SCIP and CPLEX must be installed via conda (see environment.yml)
+numpy
+pyomo
+qubolite
+notebook
+ipykernel
