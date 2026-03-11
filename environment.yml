@@ -10,4 +10,9 @@ dependencies:
   - cplex
   - pip
   - pip:
-      - git+https://github.com/allu0786ansari/Qubo_Analysis.git
+      - numpy>=1.26
+      - pyomo>=6.9
+      - "qubolite>=0.7,<0.8"   # 0.8+ has a C extension that fails on Windows MSVC
+      - notebook>=7.0
+      - ipykernel>=6.29
+      - -e .        # installs local repo as a package
