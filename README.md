@@ -117,51 +117,65 @@ Tested on matrices of size 4×4, 5×5, and 8×8:
 
 ## Environment Setup
 
-### Pyomo and Qubolite
+Two install paths are available depending on which solvers you need.
+SCIP and CPLEX are **conda-only** packages and cannot be installed via pip — so
+Path A (conda) is required if you intend to use either of those solvers.
 
-1. **Create a virtual environment:**
-   ```bash
-   conda create -n qubo-env python=3.11
-   ```
+| Path | Solvers available | Requires |
+|------|------------------|----------|
+| **A — Conda** (recommended) | SCIP, CPLEX, Qubolite, Pyomo | Conda |
+| **B — Pip** | Qubolite, Pyomo only | pip / any venv |
 
-2. **Activate the environment:**
-   ```bash
-   conda activate qubo-env
-   ```
+---
 
-3. **Install the necessary packages:**
-   ```bash
-   pip install numpy Pyomo qubolite notebook ipykernel
-   ```
+### Path A — Conda (full install, all solvers)
 
-4. **Set up the kernel:**
-   ```bash
-   python -m ipykernel install --user --name qubo-env --display-name "Python (qubo-env)"
-   ```
+**Prerequisites:** [Anaconda](https://www.anaconda.com/download) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
 
-5. **Install SCIP:**
-   ```bash
-   conda install -c conda-forge scip
-   ```
+No cloning required. `environment.yml` pulls the package directly from GitHub.
 
-6. **Install CPLEX:**
-   ```bash
-   conda install -c ibmdecisionoptimization cplex
-   ```
+#### 1. Create the environment
+```bash
+conda env create -f https://raw.githubusercontent.com/allu0786ansari/Qubo_Analysis/main/environment.yml
+```
+This single command installs Python 3.11, SCIP, CPLEX, all pip dependencies,
+and the `qubo-molecular-docking` package itself — nothing else needed.
 
-7. **Launch Jupyter Notebook:**
-   ```bash
-   jupyter notebook
-   ```
-   Click the link in the terminal to open in your browser.
+#### 2. Activate and register the Jupyter kernel
+```bash
+conda activate qubo-env
+qubo-setup-kernel
+```
 
-8. **Select the kernel** as `Python (qubo-env)`.
+#### 3. Launch Jupyter
+```bash
+jupyter notebook
+```
+Select **Python (qubo-env)** as the kernel, then open any notebook under `1_Code/`.
 
-9. **Open the notebook files** to run.
+> **Using `make`:** If you prefer, clone the repo and run `make install` instead of step 1, then `make kernel` and `make notebook`.
+>
+> **Updating later:** `conda env update -f environment.yml --prune` (or `make update`) inside the activated environment.
+
+---
+
+### Path B — Pip (Qubolite + Pyomo only)
+
+No conda needed. Install directly from GitHub via pip:
+
+```bash
+pip install git+https://github.com/allu0786ansari/Qubo_Analysis.git
+qubo-setup-kernel
+jupyter notebook
+```
+
+> ⚠️ **SCIP and CPLEX are not available on this path** — they are conda-only packages. Notebooks that use these solvers will raise an import error. Use Path A if you need them.
 
 ---
 
 ### Hercules
+
+Hercules requires a Docker container due to its Rust-based backend.
 
 1. **Pull and run the Docker container:**
    ```bash
@@ -171,29 +185,25 @@ Tested on matrices of size 4×4, 5×5, and 8×8:
      dkenefake/hercules \
      bash
    ```
-   > **Note:** Adjust the volume path (`-v`) to match your local directory.
+   > **Note:** Adjust the `-v` volume path to match your local directory.
 
-2. **Verify your workspace:**
+2. **Verify your workspace and navigate to it:**
    ```bash
    ls /workspace
-   ```
-
-3. **Move to your workspace directory:**
-   ```bash
    cd /workspace
    ```
 
-4. **Install the necessary packages to run Jupyter Notebook:**
+3. **Install Jupyter dependencies inside the container:**
    ```bash
    pip install notebook ipykernel numpy scipy
    ```
 
-5. **Launch Jupyter Notebook:**
+4. **Launch Jupyter Notebook:**
    ```bash
    jupyter notebook --ip=0.0.0.0 --no-browser --allow-root
    ```
 
-6. **Open in browser** — click the link printed in the terminal, e.g.:
+5. **Open in browser** — click the link printed in the terminal, e.g.:
    ```
    http://127.0.0.1:8888/tree?token=<your_token>
    ```
@@ -202,26 +212,33 @@ Tested on matrices of size 4×4, 5×5, and 8×8:
 
 ## Code Structure
 
-All implementation notebooks and data are located in the `1_Code/` directory, organized by solver and problem type:
-
 ```
-1_Code/                         # All implementation notebooks and data
-├── 1y6r_Qubo/                  
-│   ├── QUBO_1y6R_Pyomo_SCIP.ipynb
-│   └── Qubo_1y6r_Pyomo-CPLIX.ipynb
-├── Hercules/                   # Hercules QUBO solver implementations
-│   ├── Data/
-│   │   └── QUBO_Matrix.txt
-│   └── Qubo_Matrix.ipynb
-├── Pyomo/                      # Pyomo + SCIP/CPLEX implementations
-│   ├── Data/
-│   │   ├── matrix.txt
-│   └── QUBO_Matrix.ipynb
-├── Qubolite/                   # Qubolite solver implementations
-│   ├── Data/
-│   │   ├── matrix.txt
-│   └── Qubolite.ipynb
-└── QUBO_Tutorial.ipynb         # 1Y6R molecular docking QUBO (GPM/FAM encoding)
+qubo-molecular-docking/
+├── environment.yml             # Full conda environment (one-command setup)
+├── pyproject.toml              # Package metadata and pip dependencies
+├── requirements.txt            # Pip-only dependencies (no SCIP/CPLEX)
+├── Makefile                    # Convenience commands: install, kernel, notebook
+├── README.md
+├── qubo_docking/               # Installable Python package
+│   ├── __init__.py
+│   └── cli.py                  # qubo-setup-kernel entry point
+└── 1_Code/                     # All implementation notebooks and data
+    ├── 1y6r_Qubo/
+    │   ├── QUBO_1y6R_Pyomo_SCIP.ipynb
+    │   └── Qubo_1y6r_Pyomo-CPLIX.ipynb
+    ├── Hercules/
+    │   ├── Data/
+    │   │   └── QUBO_Matrix.txt
+    │   └── Qubo_Matrix.ipynb
+    ├── Pyomo/
+    │   ├── Data/
+    │   │   └── matrix.txt
+    │   └── QUBO_Matrix.ipynb
+    ├── Qubolite/
+    │   ├── Data/
+    │   │   └── matrix.txt
+    │   └── Qubolite.ipynb
+    └── QUBO_Tutorial.ipynb     # 1Y6R molecular docking QUBO (GPM/FAM encoding)
 ```
 
 ---
