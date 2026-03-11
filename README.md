@@ -7,6 +7,7 @@
 - [Molecular Docking and QUBO Encoding](#molecular-docking-and-qubo-encoding)
 - [Solvers Used](#solvers-used)
 - [Experimental Results](#experimental-results)
+- [Environment Setup](#environment-setup)
 - [Code Structure](#code-structure)
 - [References](#references)
 
@@ -114,6 +115,91 @@ Tested on matrices of size 4×4, 5×5, and 8×8:
 
 ---
 
+## Environment Setup
+
+### Pyomo and Qubolite
+
+1. **Create a virtual environment:**
+   ```bash
+   conda create -n qubo-env python=3.11
+   ```
+
+2. **Activate the environment:**
+   ```bash
+   conda activate qubo-env
+   ```
+
+3. **Install the necessary packages:**
+   ```bash
+   pip install numpy Pyomo qubolite notebook ipykernel
+   ```
+
+4. **Set up the kernel:**
+   ```bash
+   python -m ipykernel install --user --name qubo-env --display-name "Python (qubo-env)"
+   ```
+
+5. **Install SCIP:**
+   ```bash
+   conda install -c conda-forge scip
+   ```
+
+6. **Install CPLEX:**
+   ```bash
+   conda install -c ibmdecisionoptimization cplex
+   ```
+
+7. **Launch Jupyter Notebook:**
+   ```bash
+   jupyter notebook
+   ```
+   Click the link in the terminal to open in your browser.
+
+8. **Select the kernel** as `Python (qubo-env)`.
+
+9. **Open the notebook files** to run.
+
+---
+
+### Hercules
+
+1. **Pull and run the Docker container:**
+   ```bash
+   docker run --platform linux/amd64 -it \
+     -p 8888:8888 \
+     -v /home/allu786ansari/hercules:/workspace \
+     dkenefake/hercules \
+     bash
+   ```
+   > **Note:** Adjust the volume path (`-v`) to match your local directory.
+
+2. **Verify your workspace:**
+   ```bash
+   ls /workspace
+   ```
+
+3. **Move to your workspace directory:**
+   ```bash
+   cd /workspace
+   ```
+
+4. **Install the necessary packages to run Jupyter Notebook:**
+   ```bash
+   pip install notebook ipykernel numpy scipy
+   ```
+
+5. **Launch Jupyter Notebook:**
+   ```bash
+   jupyter notebook --ip=0.0.0.0 --no-browser --allow-root
+   ```
+
+6. **Open in browser** — click the link printed in the terminal, e.g.:
+   ```
+   http://127.0.0.1:8888/tree?token=<your_token>
+   ```
+
+---
+
 ## Code Structure
 
 All implementation notebooks and data are located in the `1_Code/` directory, organized by solver and problem type:
@@ -151,11 +237,3 @@ All implementation notebooks and data are located in the `1_Code/` directory, or
 8. D-Wave — [Ocean SDK Installation](https://docs.dwavequantum.com/en/latest/ocean/install.html)
 9. D-Wave — Problem Formulation Guide, 2022. [www.dwavesys.com](https://www.dwavesys.com)
 10. Hercules — [DKenefake/hercules on GitHub](https://github.com/DKenefake/hercules)
-
-
-
-
-
-
-
-
