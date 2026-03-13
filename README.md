@@ -117,96 +117,111 @@ Tested on matrices of size 4×4, 5×5, and 8×8:
 
 ## Environment Setup
 
-Two install paths are available depending on which solvers you need.
-SCIP and CPLEX are **conda-only** and cannot be installed via pip — Path A is required if you need them.
+### Pyomo and Qubolite
 
-| Path | Solvers available | Requires |
-|------|------------------|----------|
-| **A — Conda** (recommended) | SCIP, CPLEX, Qubolite, Pyomo | Conda |
-| **B — Pip** | Qubolite, Pyomo only | pip / any venv |
+1. **Create a virtual environment:**
+   ```bash
+   conda create -n qubo-env python=3.11
+   ```
 
----
+2. **Activate the environment:**
+   ```bash
+   conda activate qubo-env
+   ```
 
-### Path A — Conda (full install, all solvers)
+3. **Install the necessary packages:**
+   ```bash
+   pip install numpy Pyomo qubolite notebook ipykernel
+   ```
 
-**Prerequisites:** [Anaconda](https://www.anaconda.com/download) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
+4. **Set up the kernel:**
+   ```bash
+   python -m ipykernel install --user --name qubo-env --display-name "Python (qubo-env)"
+   ```
 
-```bash
-# 1. Create and activate the environment
-conda create -n qubo-env python=3.11
-conda activate qubo-env
+5. **Install SCIP:**
+   ```bash
+   conda install -c conda-forge scip
+   ```
 
-# 2. Install conda-only solvers
-conda install -c conda-forge scip
-conda install -c ibmdecisionoptimization cplex
+6. **Install CPLEX:**
+   ```bash
+   conda install -c ibmdecisionoptimization cplex
+   ```
 
-# 3. Install this repo — all remaining dependencies are pulled in automatically
-pip install git+https://github.com/allu0786ansari/Qubo_Analysis.git
+7. **Launch Jupyter Notebook:**
+   ```bash
+   jupyter notebook
+   ```
+   Click the link in the terminal to open in your browser.
 
-# 4. Register the Jupyter kernel
-qubo-setup-kernel
+8. **Select the kernel** as `Python (qubo-env)`.
 
-# 5. Launch Jupyter
-jupyter notebook
-```
-
-Select **Python (qubo-env)** as the kernel, then open any notebook under `1_Code/`.
-
----
-
-### Path B — Pip only (Qubolite + Pyomo, no SCIP/CPLEX)
-
-```bash
-# 1. Create and activate a virtual environment
-python -m venv qubo-env
-
-# Windows
-qubo-env\Scripts\activate
-# Mac / Linux
-source qubo-env/bin/activate
-
-# 2. Install this repo — all dependencies are pulled in automatically
-pip install git+https://github.com/allu0786ansari/Qubo_Analysis.git
-
-# 3. Register the Jupyter kernel
-qubo-setup-kernel
-
-# 4. Launch Jupyter
-jupyter notebook
-```
-
-> ⚠️ **SCIP and CPLEX are not available on this path.** Notebooks using those solvers will raise an import error. Use Path A if you need them.
+9. **Open the notebook files** to run.
 
 ---
 
 ### Hercules
 
+1. **Pull and run the Docker container:**
+   ```bash
+   docker run --platform linux/amd64 -it \
+     -p 8888:8888 \
+     -v /home/allu786ansari/hercules:/workspace \
+     dkenefake/hercules \
+     bash
+   ```
+   > **Note:** Adjust the volume path (`-v`) to match your local directory.
+
+2. **Verify your workspace:**
+   ```bash
+   ls /workspace
+   ```
+
+3. **Move to your workspace directory:**
+   ```bash
+   cd /workspace
+   ```
+
+4. **Install the necessary packages to run Jupyter Notebook:**
+   ```bash
+   pip install notebook ipykernel numpy scipy
+   ```
+
+5. **Launch Jupyter Notebook:**
+   ```bash
+   jupyter notebook --ip=0.0.0.0 --no-browser --allow-root
+   ```
+
+6. **Open in browser** — click the link printed in the terminal, e.g.:
+   ```
+   http://127.0.0.1:8888/tree?token=<your_token>
+   ```
+
+---
+
 ## Code Structure
 
+All implementation notebooks and data are located in the `1_Code/` directory, organized by solver and problem type:
+
 ```
-qubo-molecular-docking/
-├── pyproject.toml              # Package metadata and all pip dependencies
-├── README.md
-├── qubo_docking/               # Installable Python package
-│   ├── __init__.py
-│   └── cli.py                  # qubo-setup-kernel entry point
-└── 1_Code/                     # All implementation notebooks and data
-    ├── 1y6r_Qubo/
-    │   ├── QUBO_1y6R_Pyomo_SCIP.ipynb
-    │   └── Qubo_1y6r_Pyomo-CPLIX.ipynb
-    ├── Hercules/
-    │   ├── Data/
-    │   │   └── QUBO_Matrix.txt
-    │   └── Qubo_Matrix.ipynb
-    ├── Pyomo/
-    │   ├── Data/
-    │   │   └── matrix.txt
-    │   └── QUBO_Matrix.ipynb
-    ├── Qubolite/
-    │   ├── Data/
-    │   │   └── matrix.txt
-    │   └── Qubolite.ipynb
-    └── QUBO_Tutorial.ipynb     # 1Y6R molecular docking QUBO (GPM/FAM encoding)
+1_Code/                         # All implementation notebooks and data
+├── 1y6r_Qubo/                  
+│   ├── QUBO_1y6R_Pyomo_SCIP.ipynb
+│   └── Qubo_1y6r_Pyomo-CPLIX.ipynb
+├── Hercules/                   # Hercules QUBO solver implementations
+│   ├── Data/
+│   │   └── QUBO_Matrix.txt
+│   └── Qubo_Matrix.ipynb
+├── Pyomo/                      # Pyomo + SCIP/CPLEX implementations
+│   ├── Data/
+│   │   ├── matrix.txt
+│   └── QUBO_Matrix.ipynb
+├── Qubolite/                   # Qubolite solver implementations
+│   ├── Data/
+│   │   ├── matrix.txt
+│   └── Qubolite.ipynb
+└── QUBO_Tutorial.ipynb         # 1Y6R molecular docking QUBO (GPM/FAM encoding)
 ```
 
 ---
