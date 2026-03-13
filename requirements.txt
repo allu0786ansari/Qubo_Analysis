@@ -2,6 +2,6 @@
 # NOTE: SCIP and CPLEX must be installed via conda (see environment.yml)
 numpy
 pyomo
-qubolite      # 0.8+ has a C extension that fails on Windows MSVC
+qubolite  
 notebook
 ipykernel
