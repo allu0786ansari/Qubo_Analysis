@@ -1,0 +1,17 @@
+Installation and Setup: Hercules
+
+1. Pull the docker container: docker run --platform linux/amd64 -it \
+  				-p 8888:8888 \
+  				-v /home/allu786ansari/hercules:/workspace \
+  				dkenefake/hercules \
+  				bash
+Note: Adjust the path according to your directory
+
+2. Verify your workspace: ls /workspace
+
+3. Move to your workspace directory: cd /workspace
+4. Install the necessary packages to run jupyter notebook: pip install notebook ipykernel numpy scipy
+
+5. Navigate to notebook: jupyter notebook --ip=0.0.0.0 --no-browser --allow-root
+
+6. Click the link  in terminal and open in browser: http://127.0.0.1:8888/tree?token=10efd543b88606d92f53e70e8eae63a3667f759e91417f44

@@ -1,0 +1,21 @@
+Environment Setup: Pyomo and Qubolite
+
+1. Create a virtual env: conda create -n qubo-env python=3.11
+
+2. activate the env: conda activate qubo-env
+
+3. install the necessary packages: pip install numpy Pyomo qubolite notebook ipykernel
+
+4. setup the kernel:python -m ipykernel install --user --name qubo-env --display-name "Python (qubo-env)"
+
+5. Install the scip: conda install -c conda-forge scip
+
+6. Install the cplex: conda install -c ibmdecisionoptimization cplex
+
+7. Terminal: 
+cmd: jupyter notebook 
+	click the link to open in browser
+
+8. Select the kernel as Python (qubo-env)
+
+9. Open the notebook files to run
