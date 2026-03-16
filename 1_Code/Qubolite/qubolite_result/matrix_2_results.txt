@@ -1,0 +1,28 @@
+QUBOLite Search Results
+========================
+Input file       : matrix_2.txt
+Variables (n)    : 4
+
+--- BRUTE FORCE OPTIMUM ---
+Best bitstring   : [1, 1, 1, 1]
+Minimum energy   : -20.0
+
+--- ALL 16 POSSIBLE STATES (Sorted) ---
+Bitstring | Energy
+-------------------
+1111   | -20.0
+1011   | -15.0
+1101   | -9.0
+1110   | -9.0
+0011   | -4.0
+1001   | -4.0
+1010   | -4.0
+1100   | -4.0
+0111   | -3.0
+0000   | 0.0
+0001   | 1.0
+0010   | 1.0
+0100   | 1.0
+1000   | 1.0
+0101   | 2.0
+0110   | 2.0

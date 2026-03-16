@@ -1,0 +1,62 @@
+Matrix File : matrix_2.txt
+Matrix Size : 4 x 4
+Symmetric   : True
+
+========================================
+Solver : SCIP
+========================================
+Top-K Solutions : 5
+
+Solution 1
+Objective : -20.0
+Bitstring : [1, 1, 1, 1]
+
+Solution 2
+Objective : -15.0
+Bitstring : [1, 0, 1, 1]
+
+Solution 3
+Objective : -9.0
+Bitstring : [1, 1, 1, 0]
+
+Solution 4
+Objective : -9.0
+Bitstring : [1, 1, 0, 1]
+
+Solution 5
+Objective : -4.0
+Bitstring : [0, 0, 1, 1]
+
+Best Solution
+Objective : -20.0
+Bitstring : [1, 1, 1, 1]
+
+========================================
+Solver : CPLEX
+========================================
+Top-K Solutions : 5
+
+Solution 1
+Objective : -20.0
+Bitstring : [1, 1, 1, 1]
+
+Solution 2
+Objective : -15.0
+Bitstring : [1, 0, 1, 1]
+
+Solution 3
+Objective : -9.0
+Bitstring : [1, 1, 1, 0]
+
+Solution 4
+Objective : -9.0
+Bitstring : [1, 1, 0, 1]
+
+Solution 5
+Objective : -4.0
+Bitstring : [0, 0, 1, 1]
+
+Best Solution
+Objective : -20.0
+Bitstring : [1, 1, 1, 1]
+
