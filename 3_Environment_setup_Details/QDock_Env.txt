@@ -1,0 +1,46 @@
+sudo apt update
+sudo apt install build-essential
+
+Install Python dev headers
+sudo apt install python3-dev
+
+
+AutoDockFR
+
+1. Download and Extract ADFR Suite
+	Download the Linux package: ADFRsuite_x86_64Linux_1.0.tar.gz
+	Website Link: https://ccsb.scripps.edu/adfr/downloads/
+	Google Drive Link: 	https://drive.google.com/drive/folders/13kMSGW0La6OooKCb5dqBMBEJ31AUfIw8?	usp=sharing
+
+2. Extract it:  tar -xvzf ADFRsuite_x86_64Linux_1.0.tar.gz
+A new folder will appear: ADFRsuite_x86_64Linux_1.0/
+
+cd ~/ADFRsuite_x86_64Linux_1.0
+bash install.sh
+
+Alternative:
+chmod -R 755 ADFRsuite_x86_64Linux_1.0
+./install.sh
+
+
+ADFR uses openbabel if system misses packages
+sudo apt install -y libsm6 libxext6 libxrender1
+ 
+3 Add ADFR Suite to the System PATH
+	Edit your ~/.bashrc: nano ~/.bashrc
+	Scroll to the bottom and add:
+ 	export PATH="$PATH:/home/<your_username>/ADFRsuite_x86_64Linux_1.0/bin"
+	Replace your username accordingly
+	Save it: Ctrl+o -> Enter -> ctrl X
+	Reload the bash: source ~/.bashrc
+
+
+Env_Setup
+
+conda create -n dockvenv python=3.10 -y
+conda activate dockvenv
+
+
+pip install 'numpy<2' 'scipy==1.10'
+pip install prody pyqubo dimod dwave-samplers notebook ipykernel
+python -m ipykernel install --user --name dockvenv --display-name "Python (dockvenv)"

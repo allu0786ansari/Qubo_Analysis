@@ -4,7 +4,8 @@ Environment Setup: Pyomo and Qubolite
 
 2. activate the env: conda activate qubo-env
 
-3. install the necessary packages: pip install numpy Pyomo qubolite notebook ipykernel
+3. install the necessary packages: pip install numpy Pyomo qubolite notebook ipykernel matplotlib seaborn scikit-learn python-igraph portion
+
 
 4. setup the kernel:python -m ipykernel install --user --name qubo-env --display-name "Python (qubo-env)"
 
