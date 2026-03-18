@@ -1,21 +1,48 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
-name = "qubo-molecular-docking"
-version = "0.1.0"
+name = "qubo_analysis"
+dynamic = ["version"]
 description = "QUBO formulation and benchmarking for quantum molecular docking"
 readme = "README.md"
-requires-python = ">=3.11"
-license = { text = "MIT" }
+authors = [
+    {name = "Allaudin Ansari", email = "allu456654ansari@gmail.com"},
+]
+requires-python = ">=3.9, <3.11"
+license = {file = "LICENSE"}
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Scientific/Engineering :: Chemistry",
+    "Topic :: Scientific/Engineering :: Quantum Computing",
+]
 
 dependencies = [
-    "numpy>=1.26",
+    "pyscipopt>=4.4.0",
+    "docplex>=2.25",
+    "cplex>=22.1.0.0",
+    "numpy>=1.26,<2.0",
     "pyomo>=6.9",
     "qubolite>=0.7,<0.8",   # 0.8+ has a C extension that fails on Windows MSVC
     "notebook>=7.0",
-    "ipykernel>=6.29",
+    "pyqubo==1.5.0",
+    "prody>=2.4.0",
+    "scipy>=1.10",
+    "dwave-neal",
+    "dimod",
+    "ipykernel",
+    "matplotlib",
+    "seaborn",
+    "scikit-learn",
+    "python-igraph",
+    "portion"
 ]
 
 [project.optional-dependencies]
@@ -25,9 +52,14 @@ dev = [
     "ruff>=0.4",
 ]
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["qubo_docking*"]
 
-[project.scripts]
-qubo-setup-kernel = "qubo_docking.cli:setup_kernel"
+[project.urls]
+#Homepage = "https://github.com/yourusername/qdock"
+Repository = "https://github.com/allu0786ansari/Qubo_Analysis.git"
+#"Bug Tracker" = "https://github.com/yourusername/qdock/issues"
+#"Article" = "https://doi.org/10.1021/acs.jctc.3c00943"
+
+[tool.hatch.version]
+path = "qubo_analysis/__init__.py"
+
+[tool.hatch.build.targets.wheel]
