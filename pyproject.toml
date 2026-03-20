@@ -3,14 +3,14 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "qubo_analysis"
+name = "qubo-analysis"
 dynamic = ["version"]
 description = "QUBO formulation and benchmarking for quantum molecular docking"
 readme = "README.md"
 authors = [
     {name = "Allaudin Ansari", email = "allu456654ansari@gmail.com"},
 ]
-requires-python = ">=3.9, <3.11"
+requires-python = "==3.10.*"
 license = {file = "LICENSE"}
 
 classifiers = [
@@ -26,40 +26,41 @@ classifiers = [
 
 dependencies = [
     "pyscipopt>=4.4.0",
-    "docplex>=2.25",
-    "cplex>=22.1.0.0",
     "numpy>=1.26,<2.0",
     "pyomo>=6.9",
     "qubolite>=0.7,<0.8",   # 0.8+ has a C extension that fails on Windows MSVC
     "notebook>=7.0",
-    "pyqubo==1.5.0",
+    "pyqubo>=1.4,<2.0",
     "prody>=2.4.0",
     "scipy>=1.10",
-    "dwave-neal",
-    "dimod",
+    "dimod>=0.12",           # dwave-neal is legacy; dimod provides SimulatedAnnealingSampler
     "ipykernel",
     "matplotlib",
     "seaborn",
     "scikit-learn",
     "python-igraph",
-    "portion"
+    "portion",
 ]
 
 [project.optional-dependencies]
+cplex = [
+    "cplex>=22.1.0.0",       # Requires IBM CPLEX license; not on public PyPI
+    "docplex>=2.25",
+]
 dev = [
     "pytest>=8.0",
     "black>=24.0",
     "ruff>=0.4",
 ]
 
-
 [project.urls]
-#Homepage = "https://github.com/yourusername/qdock"
+# Homepage = "https://github.com/yourusername/Qubo_Analysis"
 Repository = "https://github.com/allu0786ansari/Qubo_Analysis.git"
-#"Bug Tracker" = "https://github.com/yourusername/qdock/issues"
-#"Article" = "https://doi.org/10.1021/acs.jctc.3c00943"
+# "Bug Tracker" = "https://github.com/yourusername/Qubo_Analysis/issues"
+# "Article" = "https://doi.org/10.1021/acs.jctc.3c00943"
 
 [tool.hatch.version]
 path = "qubo_analysis/__init__.py"
 
 [tool.hatch.build.targets.wheel]
+packages = ["qubo_analysis"]
