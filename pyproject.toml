@@ -28,8 +28,7 @@ dependencies = [
     "pyscipopt>=4.4.0",
     "numpy>=1.26,<2.0",
     "pyomo>=6.9",
-    "qubolite>=0.7,<0.8",   # 0.8+ has a C extension that fails on Windows MSVC
-    "notebook>=7.0",
+    "qubolite",   
     "pyqubo>=1.4,<2.0",
     "prody>=2.4.0",
     "scipy>=1.10",
