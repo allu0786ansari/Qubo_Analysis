@@ -1,4 +1,4 @@
-﻿# QUBO Analysis for Molecular Docking
+# QUBO Analysis for Molecular Docking
 
 ## Table of Contents
 
@@ -8,6 +8,11 @@
 - [Solvers Used](#solvers-used)
 - [Experimental Results](#experimental-results)
 - [Environment Setup](#environment-setup)
+  - [System Dependencies](#system-dependencies)
+  - [AutoDockFR (ADFR Suite)](#autodockfr-adfr-suite)
+  - [Python Environment (Pyomo / SCIP / CPLEX / Qubolite)](#python-environment-pyomo--scip--cplex--qubolite)
+  - [SCIP and CPLEX — Installation Notes](#scip-and-cplex--installation-notes)
+  - [Hercules (Docker)](#hercules-docker)
 - [Code Structure](#code-structure)
 - [References](#references)
 
@@ -39,6 +44,8 @@ where `x` is a binary decision vector and `Q` is a square matrix of constants.
 - **Off-diagonal entries** encode quadratic interaction terms between variable pairs.
 - **Constraint encoding** — constraints are converted to quadratic penalty terms added to the objective, penalizing infeasible solutions while leaving feasible ones unaffected.
 - **Ising equivalence** — via the substitution xᵢ = (1 + sᵢ)/2 with sᵢ ∈ {−1, +1}, any QUBO maps to an Ising Hamiltonian, enabling execution on quantum annealing hardware.
+
+---
 
 ## Molecular Docking and QUBO Encoding
 
@@ -99,7 +106,7 @@ Tested on matrices of size 4×4, 5×5, and 8×8:
 | Q1 (4×4) | -11.0 | Unique global optimum |
 | Q2 (5×5) | -5.0  | Degenerate — multiple optima |
 | Q3 (8×8) | -12.0 | Unique global optimum |
-| Q4 (8×8) | -6889.0 | Highly degenerate- multiple optima |
+| Q4 (8×8) | -6889.0 | Highly degenerate — multiple optima |
 
 ### Molecular Docking QUBO (Protein: 1Y6R, FAM/GPM, 675 variables)
 
@@ -117,86 +124,215 @@ Tested on matrices of size 4×4, 5×5, and 8×8:
 
 ## Environment Setup
 
-### Pyomo and Qubolite
+### System Dependencies
 
-1. **Create a virtual environment:**
-   ```bash
-   conda create -n qubo-env python=3.11
-   ```
+Install essential build tools and headers before setting up any Python environment:
 
-2. **Activate the environment:**
-   ```bash
-   conda activate qubo-env
-   ```
+```bash
+sudo apt update
+sudo apt install build-essential
 
-3. **Install the necessary packages:**
-   ```bash
-   pip install numpy Pyomo qubolite notebook ipykernel
-   ```
+# Python development headers
+sudo apt install python3-dev
 
-4. **Set up the kernel:**
-   ```bash
-   python -m ipykernel install --user --name qubo-env --display-name "Python (qubo-env)"
-   ```
-
-5. **Install SCIP:**
-   ```bash
-   conda install -c conda-forge scip
-   ```
-
-6. **Install CPLEX:**
-   ```bash
-   conda install -c ibmdecisionoptimization cplex
-   ```
-
-7. **Launch Jupyter Notebook:**
-   ```bash
-   jupyter notebook
-   ```
-   Click the link in the terminal to open in your browser.
-
-8. **Select the kernel** as `Python (qubo-env)`.
-
-9. **Open the notebook files** to run.
+# System libraries required by OpenBabel (used by ADFR)
+sudo apt install -y libsm6 libxext6 libxrender1
+```
 
 ---
 
-### Hercules
+### AutoDockFR (ADFR Suite)
 
-1. **Pull and run the Docker container:**
-   ```bash
-   docker run --platform linux/amd64 -it \
-     -p 8888:8888 \
-     -v /home/allu786ansari/hercules:/workspace \
-     dkenefake/hercules \
-     bash
-   ```
-   > **Note:** Adjust the volume path (`-v`) to match your local directory.
+AutoDockFR is required for grid generation (GPM encoding) and feature atom computation (FAM encoding).
 
-2. **Verify your workspace:**
-   ```bash
-   ls /workspace
-   ```
+#### 1. Download the ADFR Suite
 
-3. **Move to your workspace directory:**
-   ```bash
-   cd /workspace
-   ```
+Download the Linux package `ADFRsuite_x86_64Linux_1.0.tar.gz` from one of the following:
 
-4. **Install the necessary packages to run Jupyter Notebook:**
-   ```bash
-   pip install notebook ipykernel numpy scipy
-   ```
+- **Official site:** https://ccsb.scripps.edu/adfr/downloads/
+- **Google Drive mirror:** https://drive.google.com/drive/folders/13kMSGW0La6OooKCb5dqBMBEJ31AUfIw8?usp=sharing
 
-5. **Launch Jupyter Notebook:**
-   ```bash
-   jupyter notebook --ip=0.0.0.0 --no-browser --allow-root
-   ```
+#### 2. Extract and Install
 
-6. **Open in browser** — click the link printed in the terminal, e.g.:
-   ```
-   http://127.0.0.1:8888/tree?token=<your_token>
-   ```
+```bash
+tar -xvzf ADFRsuite_x86_64Linux_1.0.tar.gz
+cd ~/ADFRsuite_x86_64Linux_1.0
+bash install.sh
+```
+
+> **Alternative if `bash install.sh` fails:**
+> ```bash
+> chmod -R 755 ADFRsuite_x86_64Linux_1.0
+> ./install.sh
+> ```
+
+#### 3. Add ADFR Suite to System PATH
+
+Open your shell config file:
+
+```bash
+nano ~/.bashrc
+```
+
+Scroll to the bottom and add the following line (replace `<your_username>` with your actual username):
+
+```bash
+export PATH="$PATH:/home/<your_username>/ADFRsuite_x86_64Linux_1.0/bin"
+```
+
+Save and reload:
+
+```bash
+# Save: Ctrl+O → Enter → Ctrl+X
+source ~/.bashrc
+```
+
+---
+
+### Python Environment (Pyomo / SCIP / CPLEX / Qubolite)
+
+#### 1. Create and activate the conda environment
+
+```bash
+conda create -n dockvenv python=3.10 -y
+conda activate dockvenv
+```
+
+#### 2. Install the package via pip + git
+
+```bash
+pip install git+https://github.com/allu0786ansari/Qubo_Analysis.git
+```
+
+#### 3. Set up the Jupyter kernel
+
+```bash
+python -m ipykernel install --user --name dockvenv --display-name "Python (dockvenv)"
+```
+
+#### 4. Install SCIP
+
+```bash
+conda install -c conda-forge scip
+```
+
+#### 5. Install CPLEX
+
+```bash
+conda install -c ibmdecisionoptimization cplex
+```
+
+#### 6. Launch Jupyter Notebook
+
+```bash
+jupyter notebook
+```
+
+Click the link printed in the terminal to open in your browser.
+
+#### 7. Select the kernel
+
+In the Jupyter interface, select **Python (dockvenv)** as your kernel.
+
+#### 8. Open notebook files to run
+
+Navigate to the `1_Code/` directory and open the relevant notebooks.
+
+---
+
+### SCIP and CPLEX — Installation Notes
+
+Understanding the limitations of each installation method will help you choose the right approach.
+
+#### SCIP
+
+| Method | Access via Pyomo | Limitations |
+|--------|-----------------|-------------|
+| `pip install pyscipopt` | ❌ No | Full SCIP functionality, but **cannot be used through Pyomo** |
+| `conda install -c conda-forge scip` | ✅ Yes | **Recommended** — full access, no variable limits, Pyomo-compatible |
+
+> **Summary:** SCIP can be installed via pip (`pyscipopt`) without any size limitations, but to use it through Pyomo you must install it via conda.
+
+#### CPLEX
+
+| Method | Access via Pyomo | Limitations |
+|--------|-----------------|-------------|
+| `pip install cplex` | ✅ Yes | **Community edition only** — limited to 1,000 variables and 1,000 constraints |
+| IBM CPLEX Optimization Studio (full) | ✅ Yes | No limits — requires manual installation and PATH configuration |
+
+To use the **full CPLEX** (no variable limit), install IBM CPLEX Optimization Studio manually and configure the environment variables:
+
+```bash
+export CPLEX_STUDIO_DIR=/opt/ibm/ILOG/CPLEX_Studio2211
+export PATH=$CPLEX_STUDIO_DIR/cplex/bin/x86-64_linux:$PATH
+export LD_LIBRARY_PATH=$CPLEX_STUDIO_DIR/cplex/bin/x86-64_linux:$LD_LIBRARY_PATH
+```
+
+Add these lines to your `~/.bashrc` and run `source ~/.bashrc` to persist them.
+
+> **Summary:** `pip install cplex` gives only the community edition (1,000-variable limit). For the full solver, manual setup via IBM CPLEX Optimization Studio is required.
+
+---
+
+### Hercules (Docker)
+
+Hercules runs inside a Docker container. Follow these steps to set it up.
+
+#### 1. Install Docker
+
+Follow the official Docker installation guide for your OS: https://docs.docker.com/engine/install/
+
+#### 2. Add your user to the Docker group
+
+```bash
+sudo usermod -aG docker $USER
+newgrp docker
+```
+
+#### 3. Test Docker
+
+```bash
+docker run hello-world
+```
+
+#### 4. Pull and run the Hercules container
+
+```bash
+docker run --platform linux/amd64 -it \
+  -p 8888:8888 \
+  -v /home/allu786ansari/1_Code/Hercules:/workspace \
+  dkenefake/hercules \
+  bash
+```
+
+> **Note:** Adjust the `-v` volume path to match your local `Hercules/` directory.
+
+#### 5. Inside the container — verify and navigate
+
+```bash
+ls /workspace
+cd /workspace
+```
+
+#### 6. Install Jupyter and dependencies
+
+```bash
+pip install notebook ipykernel numpy scipy
+```
+
+#### 7. Launch Jupyter Notebook
+
+```bash
+jupyter notebook --ip=0.0.0.0 --no-browser --allow-root
+```
+
+#### 8. Open in browser
+
+Click the link printed in the terminal, for example:
+
+```
+http://127.0.0.1:8888/tree?token=<your_token>
+```
 
 ---
 
@@ -213,15 +349,15 @@ All implementation notebooks and data are located in the `1_Code/` directory, or
 │   ├── Data/
 │   │   └── QUBO_Matrix.txt
 │   └── Qubo_Matrix.ipynb
-├── qubo_analysis                      # Pyomo + SCIP/CPLEX implementations
-│   ├── __init__.py
+├── qubo_analysis               # Package source
+│   └── __init__.py
 ├── Pyomo/                      # Pyomo + SCIP/CPLEX implementations
 │   ├── Data/
-│   │   ├── matrix.txt
+│   │   └── matrix.txt
 │   └── QUBO_Matrix.ipynb
 ├── Qubolite/                   # Qubolite solver implementations
 │   ├── Data/
-│   │   ├── matrix.txt
+│   │   └── matrix.txt
 │   └── Qubolite.ipynb
 └── QUBO_Tutorial.ipynb         # 1Y6R molecular docking QUBO (GPM/FAM encoding)
 ```
@@ -229,6 +365,7 @@ All implementation notebooks and data are located in the `1_Code/` directory, or
 ---
 
 ## References
+
 1. QDock — [JinyinZha/QDock on GitHub](https://github.com/JinyinZha/QDock/tree/main)
 2. Glover et al. — [A Tutorial on Formulating and Using QUBO Models (arXiv:1811.11538)](https://arxiv.org/abs/1811.11538)
 3. J. Zha et al. — "Encoding Molecular Docking for Quantum Computers," *J. Chem. Theory Comput.*, vol. 19, no. 24, pp. 9018–9024, Dec. 2023. [DOI: 10.1021/acs.jctc.3c00943](https://doi.org/10.1021/acs.jctc.3c00943)
