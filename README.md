@@ -359,7 +359,9 @@ All implementation notebooks and data are located in the `1_Code/` directory, or
 │   ├── Data/
 │   │   └── matrix.txt
 │   └── Qubolite.ipynb
-└── QUBO_Tutorial.ipynb         # 1Y6R molecular docking QUBO (GPM/FAM encoding)
+├── qubo_analysis/                   # Qubolite solver implementations
+│   ├── __init__.py
+
 ```
 
 ---
