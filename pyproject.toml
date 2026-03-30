@@ -39,6 +39,7 @@ dependencies = [
     "scikit-learn",
     "python-igraph",
     "portion",
+    "notebook",
 ]
 
 [project.optional-dependencies]
