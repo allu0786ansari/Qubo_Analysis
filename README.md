@@ -226,6 +226,7 @@ conda install -c ibmdecisionoptimization cplex
 #### 6. Launch Jupyter Notebook
 
 ```bash
+pip install notebook
 jupyter notebook
 ```
 
