@@ -201,6 +201,7 @@ conda activate dockvenv
 #### 2. Install the package via pip + git
 
 ```bash
+git clone https://github.com/allu0786ansari/Qubo_Analysis.git
 pip install git+https://github.com/allu0786ansari/Qubo_Analysis.git
 ```
 
@@ -225,6 +226,7 @@ conda install -c ibmdecisionoptimization cplex
 #### 6. Launch Jupyter Notebook
 
 ```bash
+pip install notebook
 jupyter notebook
 ```
 
