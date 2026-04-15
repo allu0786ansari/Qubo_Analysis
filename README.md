@@ -189,17 +189,16 @@ source ~/.bashrc
 
 ---
 
-# IBM CPLEX Installation Guide (Linux)
+### IBM CPLEX Installation Guide (Linux)
 ---
-### step 1: Download IBM CPLEX Installer
+#### step 1: Download IBM CPLEX Installer
 #### Option 1: Official Website
 Download from:
 https://ibm.ent.box.com/s/63kugldvex6sq9awjbxjz26qja9t1kxg
 
 #### Option 2: Google Drive
-Download from:
-https://drive.google.com/file/d/1DCMqI1IQ4fAILzpXy4VCgAeVUQG-92l0/view?usp=sharing
----
+- **Google Drive mirror:** https://drive.google.com/drive/folders/13kMSGW0La6OooKCb5dqBMBEJ31AUfIw8?usp=sharing
+
 
 ### Step 2: Navigate to the file directory 
 ```bash
