@@ -189,6 +189,18 @@ source ~/.bashrc
 
 ---
 
+# IBM CPLEX Installation Guide (Linux)
+### step 1: Download IBM CPLEX Installer
+### Option 1: Official Website
+Download from:
+https://ibm.ent.box.com/s/63kugldvex6sq9awjbxjz26qja9t1kxg
+
+### Option 2: Google Drive
+Download from:
+https://drive.google.com/file/d/1DCMqI1IQ4fAILzpXy4VCgAeVUQG-92l0/view?usp=sharing
+
+
+
 ### Python Environment (Pyomo / SCIP / CPLEX / Qubolite)
 
 #### 1. Create and activate the conda environment
