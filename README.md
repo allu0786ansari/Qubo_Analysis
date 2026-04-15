@@ -190,15 +190,56 @@ source ~/.bashrc
 ---
 
 # IBM CPLEX Installation Guide (Linux)
+---
 ### step 1: Download IBM CPLEX Installer
-### Option 1: Official Website
+#### Option 1: Official Website
 Download from:
 https://ibm.ent.box.com/s/63kugldvex6sq9awjbxjz26qja9t1kxg
 
-### Option 2: Google Drive
+#### Option 2: Google Drive
 Download from:
 https://drive.google.com/file/d/1DCMqI1IQ4fAILzpXy4VCgAeVUQG-92l0/view?usp=sharing
+---
 
+### Step 2: Navigate to the file directory 
+```bash
+cd <directory_path>
+```
+### Step 3: Make the installer exectable
+```bash
+chmod +x cos_installer_preview-22.1.2.R4-M0N96ML-linux-x86-64.bin
+```
+### Step 4: Run the Installer
+```bash
+sudo ./cos_installer_preview-22.1.2.R4-M0N96ML-linux-x86-64.bin -i console
+```
+During Installation:
+Accept the license agreement
+Choose the installation directory (default is recommended)
+Complete the installation process
+
+### Step 5: #### 3. Add cplex to System PATH
+
+Open your shell config file:
+
+```bash
+nano ~/.bashrc
+```
+Scroll to the bottom and add the following line (replace `<your_username>` with your actual username):
+
+```bash
+export CPLEX_HOME="/opt/ibm/ILOG/CPLEX_Studio_Community2212/cplex"
+export PATH="$CPLEX_HOME/bin/x86-64_linux:$PATH"
+export LD_LIBRARY_PATH="$CPLEX_HOME/bin/x86-64_linux:$LD_LIBRARY_PATH"
+```
+Save and reload:
+
+```bash
+# Save: Ctrl+O → Enter → Ctrl+X
+source ~/.bashrc
+```
+
+---
 
 
 ### Python Environment (Pyomo / SCIP / CPLEX / Qubolite)
