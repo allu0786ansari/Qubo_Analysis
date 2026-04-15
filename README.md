@@ -192,23 +192,19 @@ source ~/.bashrc
 ### IBM CPLEX Installation Guide (Linux)
 ---
 #### step 1: Download IBM CPLEX Installer
-#### Option 1: Official Website
-Download from:
-https://ibm.ent.box.com/s/63kugldvex6sq9awjbxjz26qja9t1kxg
-
-#### Option 2: Google Drive
+- **Official site:**https://ibm.ent.box.com/s/63kugldvex6sq9awjbxjz26qja9t1kxg
 - **Google Drive mirror:** https://drive.google.com/drive/folders/13kMSGW0La6OooKCb5dqBMBEJ31AUfIw8?usp=sharing
 
 
-### Step 2: Navigate to the file directory 
+#### Step 2: Navigate to the file directory 
 ```bash
 cd <directory_path>
 ```
-### Step 3: Make the installer exectable
+#### Step 3: Make the installer exectable
 ```bash
 chmod +x cos_installer_preview-22.1.2.R4-M0N96ML-linux-x86-64.bin
 ```
-### Step 4: Run the Installer
+#### Step 4: Run the Installer
 ```bash
 sudo ./cos_installer_preview-22.1.2.R4-M0N96ML-linux-x86-64.bin -i console
 ```
@@ -217,7 +213,7 @@ Accept the license agreement
 Choose the installation directory (default is recommended)
 Complete the installation process
 
-### Step 5: #### 3. Add cplex to System PATH
+#### Step 5: Add cplex to System PATH
 
 Open your shell config file:
 
