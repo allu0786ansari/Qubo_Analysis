@@ -198,6 +198,8 @@ source ~/.bashrc
 Download the installer binary from one of the following:
 
 - **Google Drive:** https://drive.google.com/file/d/1ufelmArJzfbZH1JkZks4FrN_MWFgLSS_/view?usp=sharing
+- **Using gdown:** gdown 1ufelmArJzfbZH1JkZks4FrN_MWFgLSS_
+  note: install gdown via pip install gdown to use it
 
 The downloaded file will be named: `cplex_studio2211.linux_x86_64.bin`
 
