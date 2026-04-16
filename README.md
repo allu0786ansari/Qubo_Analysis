@@ -207,6 +207,7 @@ The downloaded file will be named: `cplex_studio2211.linux_x86_64.bin`
 
 ```bash
 cd <directory_where_installer_is_saved>
+e.g: cd downloads
 ```
 
 ---
@@ -230,6 +231,9 @@ During installation:
 - Choose the installation directory. The recommended path is:
   ```
   /home/<your_username>/ibm/ILOG/CPLEX_Studio2211
+
+  e.g: /home/allu786ansari/ibm/ILOG/CPLEX_Studio2211
+
   ```
 - Complete the installation process.
 
@@ -268,6 +272,8 @@ At the end of the CPLEX installation, the installer prints a command to install 
 
 ```bash
 python /home/<your_username>/ibm/ILOG/CPLEX_Studio2211/python/setup.py install
+
+e.g: python /home/allu786ansari/ibm/ILOG/CPLEX_Studio2211/python/setup.py install
 ```
 
 Replace `<your_username>` with your actual username and adjust the path if you chose a custom installation directory.
@@ -318,12 +324,13 @@ With `dockvenv` activated, run the setup command printed at the end of the CPLEX
 
 ```bash
 python /home/<your_username>/ibm/ILOG/CPLEX_Studio2211/python/setup.py install
+
+e.g: python /home/allu786ansari/ibm/ILOG/CPLEX_Studio2211/python/setup.py install
 ```
 
 #### 6. Launch Jupyter Notebook
 
 ```bash
-pip install notebook
 jupyter notebook
 ```
 
