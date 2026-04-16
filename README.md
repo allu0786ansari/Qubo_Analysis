@@ -130,7 +130,7 @@ Install essential build tools and headers before setting up any Python environme
 
 ```bash
 sudo apt update
-sudo apt install build-essential
+sudo apt install build-essential python3-pip python3-venv
 
 # Python development headers
 sudo apt install python3-dev
@@ -190,43 +190,67 @@ source ~/.bashrc
 ---
 
 ### IBM CPLEX Installation Guide (Linux)
+
 ---
-#### step 1: Download IBM CPLEX Installer
-- **Official site:**https://ibm.ent.box.com/s/63kugldvex6sq9awjbxjz26qja9t1kxg
-- **Google Drive mirror:** https://drive.google.com/drive/folders/13kMSGW0La6OooKCb5dqBMBEJ31AUfIw8?usp=sharing
 
+#### Step 1: Download the IBM CPLEX Installer
 
-#### Step 2: Navigate to the file directory 
+Download the installer binary from one of the following:
+
+- **Google Drive:** https://drive.google.com/file/d/1ufelmArJzfbZH1JkZks4FrN_MWFgLSS_/view?usp=sharing
+
+The downloaded file will be named: `cplex_studio2211.linux_x86_64.bin`
+
+---
+
+#### Step 2: Navigate to the Installer Directory
+
 ```bash
-cd <directory_path>
+cd <directory_where_installer_is_saved>
 ```
-#### Step 3: Make the installer exectable
+
+---
+
+#### Step 3: Make the Installer Executable
+
 ```bash
-chmod +x cos_installer_preview-22.1.2.R4-M0N96ML-linux-x86-64.bin
+chmod +x cplex_studio2211.linux_x86_64.bin
 ```
+
+---
+
 #### Step 4: Run the Installer
-```bash
-sudo ./cos_installer_preview-22.1.2.R4-M0N96ML-linux-x86-64.bin -i console
-```
-During Installation:
-Accept the license agreement
-Choose the installation directory (default is recommended)
-Complete the installation process
 
-#### Step 5: Add cplex to System PATH
+```bash
+./cplex_studio2211.linux_x86_64.bin
+```
+
+During installation:
+- Accept the license agreement.
+- Choose the installation directory. The recommended path is:
+  ```
+  /home/<your_username>/ibm/ILOG/CPLEX_Studio2211
+  ```
+- Complete the installation process.
+
+---
+
+#### Step 5: Set Up Environment Variables
 
 Open your shell config file:
 
 ```bash
 nano ~/.bashrc
 ```
-Scroll to the bottom and add the following line (replace `<your_username>` with your actual username):
+
+Scroll to the bottom and add the following lines (replace `<your_username>` with your actual username):
 
 ```bash
-export CPLEX_HOME="/opt/ibm/ILOG/CPLEX_Studio_Community2212/cplex"
-export PATH="$CPLEX_HOME/bin/x86-64_linux:$PATH"
-export LD_LIBRARY_PATH="$CPLEX_HOME/bin/x86-64_linux:$LD_LIBRARY_PATH"
+export CPLEX_HOME=$HOME/ibm/ILOG/CPLEX_Studio2211/cplex
+export PATH=$PATH:$CPLEX_HOME/bin/x86-64_linux
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CPLEX_HOME/bin/x86-64_linux
 ```
+
 Save and reload:
 
 ```bash
@@ -236,6 +260,29 @@ source ~/.bashrc
 
 ---
 
+#### Step 6: Install the CPLEX Python API
+
+> **Note:** This step requires **Python ≤ 3.10**. Activate a compatible virtual environment before proceeding.
+
+At the end of the CPLEX installation, the installer prints a command to install the Python API. Run it in your terminal — it will look similar to:
+
+```bash
+python /home/<your_username>/ibm/ILOG/CPLEX_Studio2211/python/setup.py install
+```
+
+Replace `<your_username>` with your actual username and adjust the path if you chose a custom installation directory.
+
+---
+
+#### Step 7: Verify the Installation
+
+```bash
+python3 -c "import cplex; print(cplex.__version__)"
+```
+
+If a version number is printed, the installation was successful.
+
+---
 
 ### Python Environment (Pyomo / SCIP / CPLEX / Qubolite)
 
@@ -265,10 +312,12 @@ python -m ipykernel install --user --name dockvenv --display-name "Python (dockv
 conda install -c conda-forge scip
 ```
 
-#### 5. Install CPLEX
+#### 5. Install CPLEX Python API (within conda env)
+
+With `dockvenv` activated, run the setup command printed at the end of the CPLEX installation:
 
 ```bash
-conda install -c ibmdecisionoptimization cplex
+python /home/<your_username>/ibm/ILOG/CPLEX_Studio2211/python/setup.py install
 ```
 
 #### 6. Launch Jupyter Notebook
@@ -310,15 +359,13 @@ Understanding the limitations of each installation method will help you choose t
 | `pip install cplex` | ✅ Yes | **Community edition only** — limited to 1,000 variables and 1,000 constraints |
 | IBM CPLEX Optimization Studio (full) | ✅ Yes | No limits — requires manual installation and PATH configuration |
 
-To use the **full CPLEX** (no variable limit), install IBM CPLEX Optimization Studio manually and configure the environment variables:
+To use the **full CPLEX** (no variable limit), install IBM CPLEX Optimization Studio manually using the steps in the [IBM CPLEX Installation Guide](#ibm-cplex-installation-guide-linux) above, then install the Python API inside your environment:
 
 ```bash
-export CPLEX_STUDIO_DIR=/opt/ibm/ILOG/CPLEX_Studio2211
-export PATH=$CPLEX_STUDIO_DIR/cplex/bin/x86-64_linux:$PATH
-export LD_LIBRARY_PATH=$CPLEX_STUDIO_DIR/cplex/bin/x86-64_linux:$LD_LIBRARY_PATH
+python /home/<your_username>/ibm/ILOG/CPLEX_Studio2211/python/setup.py install
 ```
 
-Add these lines to your `~/.bashrc` and run `source ~/.bashrc` to persist them.
+> **Note:** Python ≤ 3.10 is required for the CPLEX Python API. The recommended `dockvenv` conda environment uses Python 3.10 and is compatible.
 
 > **Summary:** `pip install cplex` gives only the community edition (1,000-variable limit). For the full solver, manual setup via IBM CPLEX Optimization Studio is required.
 
