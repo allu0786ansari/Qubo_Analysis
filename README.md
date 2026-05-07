@@ -150,7 +150,7 @@ AutoDockFR is required for grid generation (GPM encoding) and feature atom compu
 Download the Linux package `ADFRsuite_x86_64Linux_1.0.tar.gz` from one of the following:
 
 - **Official site:** https://ccsb.scripps.edu/adfr/downloads/
-- **Google Drive mirror:** https://drive.google.com/drive/folders/13kMSGW0La6OooKCb5dqBMBEJ31AUfIw8?usp=sharing
+- **Google Drive mirror:** https://drive.google.com/drive/folders/14jfy3ivKrlKVk2FhZGAioCFjMWMiRMJe?usp=sharing
 
 #### 2. Extract and Install
 
@@ -197,10 +197,8 @@ source ~/.bashrc
 
 Download the installer binary from one of the following:
 
-- **Google Drive:** https://drive.google.com/file/d/1ufelmArJzfbZH1JkZks4FrN_MWFgLSS_/view?usp=sharing
-- **Using gdown:** gdown 1ufelmArJzfbZH1JkZks4FrN_MWFgLSS_
+- **Google Drive:** https://drive.google.com/drive/folders/14jfy3ivKrlKVk2FhZGAioCFjMWMiRMJe?usp=sharing
 
-note: install gdown via pip install gdown to use it
 
 The downloaded file will be named: `cplex_studio2211.linux_x86_64.bin`
 
